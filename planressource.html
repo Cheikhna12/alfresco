@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroFresca - Plan de Ressources Stratégiques</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F3F4F6;
+            color: #1F2937;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; 
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2563EB; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1D4ED8; 
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background-color: #E5E7EB;
+            z-index: 0;
+        }
+        
+        .timeline-node {
+            width: 40px;
+            height: 40px;
+            background-color: #2563EB;
+            border: 4px solid #FFFFFF;
+            border-radius: 50%;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .ai-gradient-border {
+            position: relative;
+            background: white;
+            border-radius: 1.5rem;
+            z-index: 1;
+        }
+        .ai-gradient-border::before {
+            content: "";
+            position: absolute;
+            inset: -4px;
+            z-index: -1;
+            border-radius: 1.7rem;
+            background: linear-gradient(45deg, #2563EB, #06B6D4, #7C3AED);
+            opacity: 0.5;
+        }
+        .typing-indicator span {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: #2563EB;
+            border-radius: 50%;
+            animation: typing 1s infinite;
+            margin: 0 2px;
+        }
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="bg-gradient-to-br from-blue-700 via-blue-600 to-cyan-500 text-white pt-20 pb-24 px-4 shadow-lg">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">
+                AeroFresca
+            </h1>
+            <p class="text-xl md:text-2xl font-light text-blue-100 mb-8">
+                Plan de Ressources Stratégiques & Allocation Budgétaire
+            </p>
+            <div class="inline-block bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
+                <span class="block text-blue-200 text-sm uppercase tracking-wider font-bold mb-1">Estimation Budgétaire Globale</span>
+                <span class="block text-5xl md:text-7xl font-bold text-white drop-shadow-md">
+                    1,7 M€ <span class="text-3xl text-blue-300 font-normal mx-2">à</span> 3,2 M€
+                </span>
+                <p class="mt-4 text-blue-100 max-w-2xl mx-auto">
+                    Investissement dédié au développement du prototype industriel (MVP) de notre réfrigérateur intelligent anti-gaspillage.
+                </p>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 -mt-16 pb-20 relative z-10 space-y-16">
+
+        <section class="bg-white rounded-3xl shadow-xl p-8 md:p-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="order-2 md:order-1">
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4 border-l-4 border-blue-600 pl-4">
+                        Stratégie de Répartition
+                    </h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Pour atteindre nos objectifs de MVP, nous avons segmenté l'investissement en quatre piliers stratégiques. La priorité absolue est donnée à l'innovation pure (R&D) et à l'intelligence du système (Tech & IA), qui cumulent 70% de l'effort financier.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <span class="text-2xl mr-3">🔬</span>
+                            <div>
+                                <strong class="block text-gray-900">40% - R&D</strong>
+                                <span class="text-sm text-gray-500">Innovation & Ingénierie cœur.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-2xl mr-3">🧠</span>
+                            <div>
+                                <strong class="block text-gray-900">30% - Tech & IA</strong>
+                                <span class="text-sm text-gray-500">Algorithmes & Infrastructure logicielle.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-2xl mr-3">⚙️</span>
+                            <div>
+                                <strong class="block text-gray-900">20% - Prototypage</strong>
+                                <span class="text-sm text-gray-500">Matériel physique & Tests.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-2xl mr-3">⚖️</span>
+                            <div>
+                                <strong class="block text-gray-900">10% - Légal</strong>
+                                <span class="text-sm text-gray-500">Conformité, Brevets & Certifications.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="order-1 md:order-2 flex flex-col items-center justify-center">
+                    <div class="chart-container">
+                        <canvas id="allocationChart"></canvas>
+                    </div>
+                    <p class="text-center text-sm text-gray-400 mt-4 italic">Répartition en pourcentage du budget total.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-gray-900">Analyse Financière : Fourchettes Budgétaires</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto mt-2">
+                    Projection des montants minimums et maximums alloués à chaque pôle, démontrant l'élasticité nécessaire pour gérer les aléas du développement hardware.
+                </p>
+            </div>
+            <div class="bg-white rounded-3xl shadow-xl p-6 md:p-10">
+                <div class="chart-container" style="max-width: 900px; height: 400px;">
+                    <canvas id="budgetRangeChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 border-l-4 border-cyan-500 pl-4">
+                Détail Opérationnel des Dépenses
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <div class="info-card bg-white rounded-2xl shadow-md overflow-hidden border-t-8 border-blue-600">
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-gray-900">Recherche & Dév.</h3>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">40%</span>
+                        </div>
+                        <p class="text-gray-600 mb-6 text-sm font-medium">
+                            Budget : 680 k€ - 1,28 M€
+                        </p>
+                        <hr class="border-gray-100 mb-6">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-bold text-blue-600 flex items-center mb-2">
+                                    <span class="text-xl mr-2">📐</span> Ingénierie
+                                </h4>
+                                <p class="text-gray-600 text-sm ml-8">Conception CAO structurelle et développement des cartes électroniques sur mesure.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-blue-600 flex items-center mb-2">
+                                    <span class="text-xl mr-2">👥</span> Recrutement Expert
+                                </h4>
+                                <p class="text-gray-600 text-sm ml-8">Intégration d'ingénieurs clés et consultants en thermodynamique.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-blue-600 flex items-center mb-2">
+                                    <span class="text-xl mr-2">💡</span> Innovation
+                                </h4>
+                                <p class="text-gray-600 text-sm ml-8">R&D sur matériaux isolants écologiques et faisabilité technique.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card bg-white rounded-2xl shadow-md overflow-hidden border-t-8 border-cyan-500">
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-gray-900">Tech & Intelligence Artificielle</h3>
+                            <span class="bg-cyan-100 text-cyan-800 text-xs font-bold px-3 py-1 rounded-full">30%</span>
+                        </div>
+                        <p class="text-gray-600 mb-6 text-sm font-medium">
+                            Budget : 510 k€ - 960 k€
+                        </p>
+                        <hr class="border-gray-100 mb-6">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-bold text-cyan-600 flex items-center mb-2">
+                                    <span class="text-xl mr-2">🤖</span> Algorithmique
+                                </h4>
+                                <p class="text-gray-600 text-sm ml-8">Création du "Cerveau" IA, vision par ordinateur et prédiction de péremption.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-cyan-600 flex items-center mb-2">
+                                    <span class="text-xl mr-2">📱</span> Software
+                                </h4>
+                                <p class="text-gray-600 text-sm ml-8">Développement App Mobile (UX/UI) et architecture Cloud/Backend.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-cyan-600 flex items-center mb-2">
+                                    <span class="text-xl mr-2">📡</span> IoT Firmware
+                                </h4>
+                                <p class="text-gray-600 text-sm ml-8">Code embarqué pour la communication temps-réel capteurs-IA.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card bg-white rounded-2xl shadow-md overflow-hidden border-t-8 border-violet-600">
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-gray-900">Prototypage & Matériel</h3>
+                            <span class="bg-violet-100 text-violet-800 text-xs font-bold px-3 py-1 rounded-full">20%</span>
+                        </div>
+                        <p class="text-gray-600 mb-6 text-sm font-medium">
+                            Budget : 340 k€ - 640 k€
+                        </p>
+                        <hr class="border-gray-100 mb-6">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-bold text-violet-600 flex items-center mb-2">
+                                    <span class="text-xl mr-2">🔩</span> Composants
+                                </h4>
+                                <p class="text-gray-600 text-sm ml-8">Achat capteurs, écrans tactiles, microprocesseurs et matériaux châssis.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-violet-600 flex items-center mb-2">
+                                    <span class="text-xl mr-2">🧪</span> Équipements de Test
+                                </h4>
+                                <p class="text-gray-600 text-sm ml-8">Bancs d'essai climatiques, tests de fiabilité et durabilité.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-violet-600 flex items-center mb-2">
+                                    <span class="text-xl mr-2">🏗️</span> Assemblage MVP
+                                </h4>
+                                <p class="text-gray-600 text-sm ml-8">Montage des premières itérations physiques et ajustements rapides.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card bg-white rounded-2xl shadow-md overflow-hidden border-t-8 border-emerald-500">
+                    <div class="p-8">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-gray-900">Légal & Conformité</h3>
+                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">10%</span>
+                        </div>
+                        <p class="text-gray-600 mb-6 text-sm font-medium">
+                            Budget : 170 k€ - 320 k€
+                        </p>
+                        <hr class="border-gray-100 mb-6">
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-bold text-emerald-600 flex items-center mb-2">
+                                    <span class="text-xl mr-2">✅</span> Certifications
+                                </h4>
+                                <p class="text-gray-600 text-sm ml-8">Normes CE/FCC, sécurité électrique et contact alimentaire.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-emerald-600 flex items-center mb-2">
+                                    <span class="text-xl mr-2">🛡️</span> Propriété Intellectuelle
+                                </h4>
+                                <p class="text-gray-600 text-sm ml-8">Dépôt de brevets (Algo & Méca) pour protéger l'innovation.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-emerald-600 flex items-center mb-2">
+                                    <span class="text-xl mr-2">⚖️</span> Juridique Général
+                                </h4>
+                                <p class="text-gray-600 text-sm ml-8">Contrats partenaires et stricte conformité RGPD (Data IA).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="bg-white rounded-3xl shadow-xl p-8 md:p-12 overflow-hidden">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">
+                Feuille de Route : Priorités Immédiates
+            </h2>
+            
+            <div class="relative max-w-3xl mx-auto">
+                <div class="timeline-line"></div>
+
+                <div class="relative z-10 flex flex-col md:flex-row items-center mb-12">
+                    <div class="md:w-1/2 md:pr-8 text-center md:text-right mb-4 md:mb-0">
+                        <h3 class="text-xl font-bold text-blue-600">Priorité 1 : Recrutement</h3>
+                        <p class="text-gray-500 mt-2">Sécuriser les talents en ingénierie R&D pour lancer la conception.</p>
+                    </div>
+                    <div class="timeline-node text-xl">1</div>
+                    <div class="md:w-1/2 md:pl-8 hidden md:block">
+                        <span class="text-sm font-bold text-blue-300">ACTION RH</span>
+                    </div>
+                </div>
+
+                <div class="relative z-10 flex flex-col md:flex-row items-center mb-12">
+                    <div class="md:w-1/2 md:pr-8 hidden md:block text-right">
+                        <span class="text-sm font-bold text-violet-300">LOGISTIQUE</span>
+                    </div>
+                    <div class="timeline-node text-xl bg-violet-600">2</div>
+                    <div class="md:w-1/2 md:pl-8 text-center md:text-left mt-4 md:mt-0">
+                        <h3 class="text-xl font-bold text-violet-600">Priorité 2 : Matériel</h3>
+                        <p class="text-gray-500 mt-2">Commander les équipements critiques pour initier le prototypage physique.</p>
+                    </div>
+                </div>
+
+                <div class="relative z-10 flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 md:pr-8 text-center md:text-right mb-4 md:mb-0">
+                        <h3 class="text-xl font-bold text-cyan-600">Priorité 3 : Algorithme</h3>
+                        <p class="text-gray-500 mt-2">Lancer le codage du cœur IA (Reconnaissance & Prédiction).</p>
+                    </div>
+                    <div class="timeline-node text-xl bg-cyan-500">3</div>
+                    <div class="md:w-1/2 md:pl-8 hidden md:block">
+                        <span class="text-sm font-bold text-cyan-300">DÉVELOPPEMENT</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="ai-assistant" class="ai-gradient-border shadow-2xl p-1 mb-16">
+            <div class="bg-white rounded-[1.4rem] p-6 md:p-10">
+                <div class="flex items-center justify-between mb-8">
+                    <div class="flex items-center">
+                        <span class="text-4xl mr-4">✨</span>
+                        <div>
+                            <h2 class="text-3xl font-bold text-gray-900">Assistant Stratégique IA</h2>
+                            <p class="text-blue-600 font-medium">Propulsé par Gemini</p>
+                        </div>
+                    </div>
+                    <div id="ai-status" class="hidden">
+                        <div class="typing-indicator flex bg-gray-100 px-4 py-2 rounded-full">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-gray-600 mb-8">
+                    Interrogez notre assistant intelligent pour analyser le budget, générer des arguments pour les investisseurs ou identifier les risques potentiels du plan AeroFresca.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <button onclick="runQuickAction('pitch')" class="flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-50 to-blue-100 hover:from-blue-100 hover:to-blue-200 text-blue-700 font-semibold py-3 px-4 rounded-xl transition-all duration-200 border border-blue-200 hover:shadow-md group">
+                        <span>📢</span>
+                        <span>Pitch Investisseur</span>
+                        <span class="opacity-0 group-hover:opacity-100 transition-opacity">✨</span>
+                    </button>
+                    <button onclick="runQuickAction('risks')" class="flex items-center justify-center space-x-2 bg-gradient-to-r from-cyan-50 to-cyan-100 hover:from-cyan-100 hover:to-cyan-200 text-cyan-700 font-semibold py-3 px-4 rounded-xl transition-all duration-200 border border-cyan-200 hover:shadow-md group">
+                        <span>⚠️</span>
+                        <span>Analyser les Risques</span>
+                        <span class="opacity-0 group-hover:opacity-100 transition-opacity">✨</span>
+                    </button>
+                    <button onclick="runQuickAction('budget')" class="flex items-center justify-center space-x-2 bg-gradient-to-r from-violet-50 to-violet-100 hover:from-violet-100 hover:to-violet-200 text-violet-700 font-semibold py-3 px-4 rounded-xl transition-all duration-200 border border-violet-200 hover:shadow-md group">
+                        <span>📉</span>
+                        <span>Justifier la R&D</span>
+                        <span class="opacity-0 group-hover:opacity-100 transition-opacity">✨</span>
+                    </button>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="relative">
+                        <textarea id="user-query" rows="3" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-4 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none" placeholder="Posez une question spécifique sur le plan de ressources (ex: Quel est l'impact du budget Légal ?)..."></textarea>
+                        <button onclick="handleCustomQuery()" class="absolute bottom-3 right-3 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg shadow-md transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div id="ai-response-container" class="hidden">
+                        <div class="bg-gray-50 border-l-4 border-blue-500 rounded-r-xl p-6 shadow-inner">
+                            <h4 class="text-sm font-bold text-gray-500 uppercase tracking-wider mb-2">Réponse de Gemini</h4>
+                            <div id="ai-response-text" class="text-gray-800 leading-relaxed whitespace-pre-wrap"></div>
+                        </div>
+                    </div>
+                    
+                    <div id="ai-error" class="hidden text-red-500 text-sm text-center bg-red-50 p-3 rounded-lg border border-red-100"></div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center text-gray-400 py-10">
+            <p>&copy; 2025 AeroFresca - Document Interne Confidentiel</p>
+        </footer>
+
+    </main>
+
+    <script>
+        Chart.defaults.font.family = "'Inter', sans-serif";
+        Chart.defaults.color = '#4B5563';
+        
+        const colors = {
+            blue: '#2563EB',
+            cyan: '#06B6D4',
+            violet: '#7C3AED',
+            emerald: '#10B981',
+            blueLight: '#93C5FD',
+            cyanLight: '#67E8F9'
+        };
+
+        function wrapLabel(str, maxChars) {
+            if (str.length <= maxChars) return str;
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= maxChars) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        const tooltipConfig = {
+            callbacks: {
+                title: function(tooltipItems) {
+                    const item = tooltipItems[0];
+                    let label = item.chart.data.labels[item.dataIndex];
+                    if (Array.isArray(label)) {
+                        return label.join(' ');
+                    } else {
+                        return label;
+                    }
+                }
+            }
+        };
+
+        const ctxAlloc = document.getElementById('allocationChart').getContext('2d');
+        const allocationChart = new Chart(ctxAlloc, {
+            type: 'doughnut',
+            data: {
+                labels: ['Recherche & Dév.', 'Tech & IA', 'Prototypage', 'Légal & Conformité'],
+                datasets: [{
+                    data: [40, 30, 20, 10],
+                    backgroundColor: [colors.blue, colors.cyan, colors.violet, colors.emerald],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        }
+                    },
+                    tooltip: tooltipConfig
+                },
+                cutout: '70%'
+            }
+        });
+
+        const ctxBudget = document.getElementById('budgetRangeChart').getContext('2d');
+        const budgetRangeChart = new Chart(ctxBudget, {
+            type: 'bar',
+            data: {
+                labels: [
+                    wrapLabel('Recherche & Dév.', 16), 
+                    wrapLabel('Tech & IA', 16), 
+                    wrapLabel('Prototypage', 16), 
+                    wrapLabel('Légal & Conformité', 16)
+                ],
+                datasets: [
+                    {
+                        label: 'Budget Min (k€)',
+                        data: [680, 510, 340, 170],
+                        backgroundColor: colors.blueLight,
+                        borderRadius: 4,
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.8
+                    },
+                    {
+                        label: 'Budget Max (k€)',
+                        data: [1280, 960, 640, 320],
+                        backgroundColor: colors.blue,
+                        borderRadius: 4,
+                        barPercentage: 0.6,
+                        categoryPercentage: 0.8
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y', 
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        grid: {
+                            display: true,
+                            color: '#E5E7EB',
+                            borderDash: [5, 5]
+                        },
+                        title: {
+                            display: true,
+                            text: 'Montant en Milliers d\'Euros (k€)'
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        align: 'end'
+                    },
+                    tooltip: tooltipConfig
+                }
+            }
+        });
+
+        
+        const reportContext = `
+        Tu es l'Assistant Stratégique IA pour le projet AeroFresca.
+        Utilise les données suivantes pour répondre :
+        - Produit : AeroFresca, un réfrigérateur intelligent anti-gaspillage.
+        - Budget Global : Entre 1,7 Million € et 3,2 Millions €.
+        - Répartition du Budget :
+          1. Recherche & Développement (40%) : Ingénierie CAO, Recrutement experts, Innovation matériaux.
+          2. Tech & IA (30%) : Algorithme (Cerveau IA), App Mobile, Firmware IoT.
+          3. Prototypage & Matériel (20%) : Composants, Équipements de Test, Assemblage MVP.
+          4. Légal & Conformité (10%) : Certifications CE/FCC, Brevets, Juridique RGPD.
+        - Priorités de la Feuille de Route :
+          1. Recrutement (Action RH)
+          2. Matériel (Logistique)
+          3. Algorithme (Développement)
+        
+        Consignes de réponse :
+        - Sois professionnel, concis et persuasif.
+        - Utilise le formatage texte simple (pas de markdown complexe).
+        - Réponds toujours en Français.
+        - Si on te demande un Pitch, fais-le court et percutant pour des investisseurs.
+        - Si on te demande une analyse de risque, base-toi sur la forte part de R&D (incertitude).
+        `;
+
+        const apiKey = "AIzaSyDJ8t9kS53IKIfbvNViS7Xi-IlrmEgxA80"; 
+
+        async function callGemini(userPrompt) {
+            const statusEl = document.getElementById('ai-status');
+            const responseContainer = document.getElementById('ai-response-container');
+            const responseText = document.getElementById('ai-response-text');
+            const errorEl = document.getElementById('ai-error');
+            
+            statusEl.classList.remove('hidden');
+            responseContainer.classList.add('hidden');
+            errorEl.classList.add('hidden');
+            responseText.innerText = '';
+
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: reportContext + "\n\nQuestion utilisateur : " + userPrompt
+                            }]
+                        }]
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Erreur API: ${response.status}`);
+                }
+
+                const data = await response.json();
+                const aiText = data.candidates[0].content.parts[0].text;
+
+                responseText.innerText = aiText;
+                responseContainer.classList.remove('hidden');
+
+            } catch (error) {
+                console.error("Gemini Error:", error);
+                errorEl.innerText = "Désolé, une erreur est survenue lors de la consultation de l'assistant. Veuillez réessayer.";
+                errorEl.classList.remove('hidden');
+            } finally {
+                statusEl.classList.add('hidden');
+            }
+        }
+
+        function handleCustomQuery() {
+            const query = document.getElementById('user-query').value;
+            if (query.trim() !== "") {
+                callGemini(query);
+            }
+        }
+
+        function runQuickAction(type) {
+            let prompt = "";
+            switch(type) {
+                case 'pitch':
+                    prompt = "Génère un pitch investisseur court (3 phrases clés) et percutant mettant en avant notre stratégie d'investissement massive en R&D et IA pour dominer le marché.";
+                    break;
+                case 'risks':
+                    prompt = "Analyse les risques potentiels liés à une allocation de 40% en R&D et 30% en Tech. Quels sont les dangers si le prototypage (20%) prend du retard ?";
+                    break;
+                case 'budget':
+                    prompt = "Justifie pourquoi nous dépensons plus en R&D (40%) qu'en Matériel (20%) pour un produit physique comme un frigo. Explique la valeur ajoutée de l'immatériel.";
+                    break;
+            }
+            document.getElementById('user-query').value = prompt;
+            callGemini(prompt);
+        }
+
+    </script>
+    
+  
+</body>
+</html>
